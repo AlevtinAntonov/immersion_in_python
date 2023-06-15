@@ -4,9 +4,10 @@
 # суммы двух других, то треугольника с такими сторонами не существует. Отдельно сообщить
 # является ли треугольник разносторонним, равнобедренным или равносторонним.
 
+NUMBER_OF_SIDES_TRIANGLE = 3
 while True:
     str_input = input('Введите длины сторон треугольника a b c (через пробел): ').split(' ')
-    if len(str_input) == 3:
+    if len(str_input) == NUMBER_OF_SIDES_TRIANGLE:
         break
 
 a = int(str_input[0])
