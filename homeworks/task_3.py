@@ -16,6 +16,8 @@ for i in range(1, int((number ** 0.5) + 1)):
         dividers.append(number // i)
 
 if len(dividers) == 2:
-    print(f'Число {number} -> простое')
+    result = 'простое'
 else:
-    print(f'Число {number} -> составное и имеет {len(dividers)} делителей')
+    result = 'составное'
+
+print(f'Число {number} -> {result} и имеет {len(dividers)} делителя(ей)')
