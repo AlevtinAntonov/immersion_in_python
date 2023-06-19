@@ -2,12 +2,21 @@
 # Выведите в консоль таблицу умножения от 2х2 до 9х10 как на школьной тетрадке.
 MIN_NUMBER = 2
 MIDDLE_NUMBER = 5
-MAX_NUMBER = 9
+MAX_NUMBER = 10
+
+
+def multiplication_table(num_1, num_2):
+    if num_2 > MIDDLE_NUMBER:
+        num_1 += 1
+        num_2 -= 1
+
+    for row in range(2, 11):
+        for col in range(num_1, num_2 + 1):
+            print(f"{col} X {row:2d} = {col * row:2d}\t ", end='')
+        print()
+
 
 print("{:^50}".format("ТАБЛИЦА УМНОЖЕНИЯ"))
-
-for row in range(MIN_NUMBER, MAX_NUMBER + 1):
-    print(*(f"{col} X {row:2d} = {row * col:2d} " for col in range(MIN_NUMBER, MIDDLE_NUMBER + 1)))
+multiplication_table(MIN_NUMBER, MIDDLE_NUMBER)
 print()
-for row in range(MIN_NUMBER, MAX_NUMBER + 1):
-    print(*(f"{col} X {row:2d} = {row * col:2d} " for col in range(MIDDLE_NUMBER + 1, MAX_NUMBER + 1)))
+multiplication_table(MIDDLE_NUMBER, MAX_NUMBER)
