@@ -12,14 +12,16 @@ while True:
 
 a, b, c = map(int, str_input)
 result = None
-
-if a + b < c or b + c < a or c + a < b:
-    result = 'Треугольник с такими сторонами не существует'
-elif a == b == c:
-    result = 'Треугольник равносторонний'
-elif a != b != c:
-    result = 'Треугольник разносторонний'
+if a and b and c:
+    if a + b < c or b + c < a or c + a < b:
+        result = 'Треугольник с такими сторонами не существует'
+    elif a == b == c:
+        result = 'Треугольник равносторонний'
+    elif a != b != c:
+        result = 'Треугольник разносторонний'
+    else:
+        result = 'Треугольник равнобедренный'
 else:
-    result = 'Треугольник равнобедренный'
+    result = 'Стороны должны быть больше 0'
 
 print(result)
