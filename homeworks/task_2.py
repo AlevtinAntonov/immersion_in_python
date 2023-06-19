@@ -17,9 +17,9 @@ if a + b < c or b + c < a or c + a < b:
     result = 'Треугольник с такими сторонами не существует'
 elif a == b == c:
     result = 'Треугольник равносторонний'
-elif a == b or b == c or a == c:
-    result = 'Треугольник равнобедренный'
-else:
+elif a != b != c:
     result = 'Треугольник разносторонний'
+else:
+    result = 'Треугольник равнобедренный'
 
 print(result)
