@@ -6,7 +6,7 @@
 
 NUMBER_OF_SIDES_TRIANGLE = 3
 while True:
-    str_input = input('Введите длины сторон треугольника a b c (через пробел): ').split(' ')
+    str_input = input('Введите длины сторон треугольника a b c (через пробел): ').split()
     if len(str_input) == NUMBER_OF_SIDES_TRIANGLE:
         break
 
