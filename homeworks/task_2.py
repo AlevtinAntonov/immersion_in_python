@@ -10,9 +10,7 @@ while True:
     if len(str_input) == NUMBER_OF_SIDES_TRIANGLE:
         break
 
-a = int(str_input[0])
-b = int(str_input[1])
-c = int(str_input[2])
+a, b, c = map(int, str_input)
 result = None
 
 if a + b < c or b + c < a or c + a < b:
