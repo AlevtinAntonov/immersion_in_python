@@ -4,22 +4,18 @@
 MIN_NUMBER = 1
 MAX_NUMBER = 100_000
 QUANTITY_OF_DIVISORS_OF_PRIME_NUMBER = 2
+result = None
+
 while True:
     number = int(input('Введите целое число от 1 до 100 000 : '))
     if MIN_NUMBER <= number <= MAX_NUMBER:
         break
 
-dividers = []
-for i in range(1, int((number ** 0.5) + 1)):
-    if i * i == number:
-        dividers.append(i)
-    elif number % i == 0:
-        dividers.append(i)
-        dividers.append(number // i)
+for i in range(2, int((number ** 0.5) + 1)):
+    if number % i == 0:
+        result = 'составное'
+        break
+    else:
+        result = 'простое'
 
-if len(dividers) == QUANTITY_OF_DIVISORS_OF_PRIME_NUMBER:
-    result = 'простое'
-else:
-    result = 'составное'
-
-print(f'Число {number} -> {result} и имеет {len(dividers)} делителя(ей)')
+print(f'Число {number} -> {result}')
