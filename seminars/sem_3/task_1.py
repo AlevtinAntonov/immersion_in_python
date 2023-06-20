@@ -4,3 +4,18 @@
 # уникальные (без повтора) элементы исходного списка.
 # ✔ *Подготовьте два решения, короткое и длинное, которое
 # не использует другие коллекции помимо списков.
+
+list_1 = [2, 10, 2, 5, 10, 5, 2, 10]
+list_2 = []
+for i in list_1:
+    if i not in list_2:
+        list_2.append(i)
+
+print(list_1)
+print(list_2)
+
+list_3 = list(set(list_1))
+print(list_3)
+
+list_4 = list(dict.fromkeys(list_1))
+print(list_4)
