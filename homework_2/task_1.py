@@ -9,7 +9,7 @@ print(hex(number))
 
 while number:
     division_result = number % hex_number
-    hex_result = hex_base[division_result] + hex_result
+    hex_result = hex_base[number % hex_number] + hex_result
     number //= hex_number
 
 print('0x' + hex_result)
