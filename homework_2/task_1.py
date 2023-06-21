@@ -8,8 +8,9 @@ hex_result = ''
 print(hex(number))
 
 while number:
-    division_result = number % hex_number
-    hex_result = hex_base[number % hex_number] + hex_result
-    number //= hex_number
+    # hex_result = hex_base[number % hex_number] + hex_result
+    # number //= hex_number
+    number, remainder = divmod(number, hex_number)
+    hex_result = hex_base[remainder] + hex_result
 
 print('0x' + hex_result)
