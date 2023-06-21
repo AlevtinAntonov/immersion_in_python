@@ -13,8 +13,8 @@ print('Fractions произведение: ', Fraction(a, b) * Fraction(c, d))
 def lowest_common_multiple(a, b):
     if a == 0 or b == 0:
         return 0
-    else:
-        return abs(a * b) // greatest_common_divisor(a, b)
+
+    return abs(a * b) // greatest_common_divisor(a, b)
 
 
 def greatest_common_divisor(a, b):
