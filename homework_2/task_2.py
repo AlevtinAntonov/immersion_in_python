@@ -6,14 +6,16 @@ fraction_1, fraction_2, signs = input('Введите две дроби чере
 a, b = map(int, fraction_1.split('/'))
 c, d = map(int, fraction_2.split('/'))
 
-print('Fractions сумма: ', Fraction(a, b) + Fraction(c, d))
-print('Fractions произведение: ', Fraction(a, b) * Fraction(c, d))
+if not b or not d:
+    print('На ноль делить нельзя!')
+else:
+    print('Fractions сумма: ', Fraction(a, b) + Fraction(c, d))
+    print('Fractions произведение: ', Fraction(a, b) * Fraction(c, d))
 
 
 def lowest_common_multiple(a, b):
     if a == 0 or b == 0:
         return 0
-
     return abs(a * b) // greatest_common_divisor(a, b)
 
 
@@ -30,6 +32,11 @@ def fraction_reduction(numerator, common_denominator):
 
     return numerator, common_denominator
 
+def check_result(numerator, denominator):
+    if numerator >= denominator:
+        numerator %= greatest_common_divisor(numerator, denominator)
+
+
 
 def calc_fractions(a, b, c, d):
     match signs:
@@ -39,7 +46,6 @@ def calc_fractions(a, b, c, d):
             c *= common_denominator // d
             numerator = a + c
             numerator, common_denominator = fraction_reduction(numerator, common_denominator)
-            # numerator, denominator = addition_fractions(a, b, c, d)
         case '*':
             numerator = a * c
             common_denominator = b * d
@@ -49,4 +55,13 @@ def calc_fractions(a, b, c, d):
 
 numerator, denominator = calc_fractions(a, b, c, d)
 
-print(f'Результат {a}/{b} {signs} {c}/{d} = {numerator}/{denominator}')
+if denominator == 0:
+    print_res = 'На ноль делить нельзя!'
+elif numerator == 0:
+    print_res = 0
+elif denominator == 1:
+    print_res = numerator
+else:
+    print_res = f'{numerator}/{denominator}'
+
+print(f'Результат {a}/{b} {signs} {c}/{d} = {print_res}')
