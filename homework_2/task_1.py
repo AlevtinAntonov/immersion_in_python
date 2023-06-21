@@ -7,7 +7,7 @@ hex_result = ''
 
 print(hex(number))
 
-while number > 0:
+while number:
     division_result = number % hex_number
     hex_result = hex_base[division_result] + hex_result
     number //= hex_number
