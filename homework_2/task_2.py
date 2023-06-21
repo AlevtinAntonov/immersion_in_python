@@ -5,8 +5,8 @@ from fractions import Fraction
 input_fractions = input('Введите две дроби через пробел и знак + или * в формате - a/b c/d + ').split()
 
 fraction_1, fraction_2, signs = map(str, input_fractions)
-a, b = map(int, str(fraction_1).split('/'))
-c, d = map(int, str(fraction_2).split('/'))
+a, b = map(int, fraction_1.split('/'))
+c, d = map(int, fraction_2.split('/'))
 
 print('Fractions сумма: ', Fraction(a, b) + Fraction(c, d))
 print('Fractions произведение: ', Fraction(a, b) * Fraction(c, d))
