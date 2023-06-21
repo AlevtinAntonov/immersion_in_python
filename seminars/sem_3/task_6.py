@@ -5,6 +5,11 @@
 # ✔ Текст выравнивается по правому краю так, чтобы у самого длинного
 # слова был один пробел между ним и номером строки.
 
-my_string = input('Введите строку: ')
+# text = input('Введите строку: ')
+text = 'j; tttk;k;k aaa;kk;k kldffdfdfdf   hdgjsgjaghdhasdhjhg gjadsjdgasjdgj'.split()
+text.sort()
 
-print(my_string.split())
+max_len = len(max(text, key=len))
+
+for index, value in enumerate(text, 1):
+    print(f'{index}. {value:>{max_len}}')

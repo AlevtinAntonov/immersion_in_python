@@ -2,10 +2,11 @@
 # ✔ Создайте вручную список с повторяющимися элементами.
 # ✔ Удалите из него все элементы, которые встречаются дважды
 
-list_1 = [1, 1, 2, 3, 9, 3, 2, 4, 5, 10, 5, 5, 9]
+my_list = [1, 1, 1, 1, 2, 2, 3, 3, 5, 5, 0, 0, 7, 7, 7, 3, 4, 4]
+sort_list = sorted(my_list)
+count = 2
+for item in sort_list:
+    if sort_list.count(item) == count:
+        my_list.remove(item)
 
-
-for i in list_1:
-    if list_1.count(i) == 2:
-        list_1.remove(i)
-print(list_1)
+print(my_list)
