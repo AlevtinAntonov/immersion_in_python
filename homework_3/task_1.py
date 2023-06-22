@@ -26,16 +26,27 @@ def all_things(dict_name):
 def unique_things(dict_name):
     unique_set = set()
     count = len(dict_name)
-    other_things = set()
+
+    unique_one_friend = dict()
     friend_name = 'Alex'
     for name_friend in name_friends:
+        other_things = set()
+        two_friend_intersection = set()
+        one_friend_has = set()
         for k, v in dict_name.items():
+            one_friend_has = set(v)
             if k != name_friend:
                 other_things = other_things.union(set(v))
-            unique_one_set = all_things(dict_name).difference(other_things)
-            unique_set = unique_set.union(unique_one_set)
+                two_friend_intersection = set(v).intersection(one_friend_has)
+                print(two_friend_intersection)
+        unique_one_set = all_things(dict_name).difference(other_things)
+        unique_one_friend.setdefault(name_friend, unique_one_set)
+        # one_friend_has = two_friend_intersection.intersection()
+        # two_friend_intersection = other_things.intersection(one_friend_has)
 
-    return unique_set
+        print(two_friend_intersection)
+
+    return unique_one_friend
 
 
     #
@@ -55,7 +66,7 @@ unique_set = set(friends['Alex']).difference(set(friends['Oleg']) | (set(friends
 
 print(f'Все три друга взяли: {all_things(friends)}')
 print(f'Уникальные вещи есть только у одного друга- {unique_things(friends)}')
-print(f'Вещи уникальны: {unique_set}')
+# print(f'Вещи уникальны: {unique_o')
 # print(f'ПЕресечение: {sorted(intersection_set)}')
 
 
