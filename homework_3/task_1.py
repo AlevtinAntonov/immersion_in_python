@@ -23,8 +23,8 @@ def list_atribute_frends(dict_list):
 # Какие вещи уникальны, есть только у одного друга
 # и имя того, у кого данная вещь отсутствует
 count = 0
-# for i in list_atribute_frends(tourists):
-#     for j in list_atribute_frends(tourists):
+# for i in list_atribute_frends(friends):
+#     for j in list_atribute_frends(friends):
 #         if j == i:
 #             count += 1
 
@@ -48,4 +48,4 @@ def dict_unicum_atribute (dict_list):
     return new_dict
 
 print(f"Вещи которые взяли три друга{sorted(set(list_atribute_frends(tourists)))}")
-# print(f"Уникальные вещи которые взял каждый друг {dict_unicum_atribute(tourists)}")
+# print(f"Уникальные вещи которые взял каждый друг {dict_unicum_atribute(friends)}")
