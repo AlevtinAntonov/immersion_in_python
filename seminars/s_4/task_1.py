@@ -20,15 +20,12 @@ text_string = 'Этот метод сортирует список на мест
               'умолчанию None означает, что элементы списка сортируются напрямую, без вычисления отдельного ' \
               'значения ключа.'
 
+
 def my_sort_func(in_text):
-    formatted_text = sorted(re.sub(r'[.,"\'-?:!;()]', '', in_text.lower()).split())
-    print(formatted_text)
+    formatted_text = sorted(re.sub(r'[.,"\'-?:!;()]', '', in_text).split())
     max_length = len(max(formatted_text, key=len))
-    print(max_length)
-    for index, value in enumerate(formatted_text, start=1):
-        out_text = '\n'.join(f'{index} {value:>{max_length}} ')
+    for index, value in enumerate(formatted_text, 1):
+        print(f'{index} {value:>{max_length}}')
 
 
-    return out_text
-
-print(my_sort_func(text_string))
+my_sort_func(text_string)
