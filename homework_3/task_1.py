@@ -6,7 +6,7 @@
 # ✔ Какие вещи есть у всех друзей кроме одного и имя того, у кого данная вещь отсутствует
 # ✔ Для решения используйте операции с множествами. Код должен расширяться на любое большее количество друзей.
 
-
+TWO = 2
 friends = {
     'Alex': ('Спальник', 'Миска', 'Спички', 'Фонарик', 'Карта', 'Палатка'),
     'Oleg': ('Спальник', 'Миска', 'Кружка', 'Спички', 'Консервы', 'Компас'),
@@ -17,117 +17,54 @@ name_friends = []
 for friend in friends:
     name_friends.append(friend)
 
+
 def all_things(dict_name):
     common_set = set()
     for k, v in dict_name.items():
         common_set = common_set.union(set(v))
     return common_set
 
-def unique_things(dict_name):
-    unique_set = set()
-    count = len(dict_name)
 
+def unique_things(dict_name):
     unique_one_friend = dict()
-    friend_name = 'Alex'
     for name_friend in name_friends:
         other_things = set()
-        two_friend_intersection = set()
-        one_friend_has = set()
         for k, v in dict_name.items():
-            one_friend_has = set(v)
             if k != name_friend:
                 other_things = other_things.union(set(v))
-                two_friend_intersection = set(v).intersection(one_friend_has)
-                print(two_friend_intersection)
+
         unique_one_set = all_things(dict_name).difference(other_things)
         unique_one_friend.setdefault(name_friend, unique_one_set)
-        # one_friend_has = two_friend_intersection.intersection()
-        # two_friend_intersection = other_things.intersection(one_friend_has)
-
-        print(two_friend_intersection)
 
     return unique_one_friend
 
 
-    #
-    # for k, v in dict_name.items():
-    #     unique_set = set(dict_name[k]).difference()
-
-    # pass
-
 def all_friends_except_one(dict_name):
-    pass
+    except_one_friend = dict()
+    unique_one_friend = unique_things(dict_name)
 
-unique_set = set(friends['Alex']).difference(set(friends['Oleg']) | (set(friends['Dima'])))
+    for k, v in dict_name.items():
+        intersection_set = set(v).difference(set(unique_one_friend[k]))
+        except_one_friend.setdefault(k, intersection_set)
 
+    all_repeat = []
+    for k, v in except_one_friend.items():
+        for i in v:
+            all_repeat.append(i)
 
-    # difference_set = common_set.difference(set(v))
-    # intersection_set = intersection_set.intersection(set(v))
+    new_list = []
+    for i in all_repeat:
+        if all_repeat.count(i) == TWO and not new_list.count(i):
+            new_list.append(i)
+
+    for i in range(len(new_list)):
+        two_things_has_friends = set()
+        two_things_has_friends.add(new_list[i])
+        for k, v in except_one_friend.items():
+            if len(two_things_has_friends.intersection(set(v))) == 0:
+                print(f' У {k} нет -> {new_list[i]}, а двух остальных есть.')
+
 
 print(f'Все три друга взяли: {all_things(friends)}')
 print(f'Уникальные вещи есть только у одного друга- {unique_things(friends)}')
-# print(f'Вещи уникальны: {unique_o')
-# print(f'ПЕресечение: {sorted(intersection_set)}')
-
-
-# my_set = {3, 4, 2, 5, 6, 1, 7}
-# other_set = {1, 4, 42, 314}
-# new_set = my_set.union(other_set)
-# print(f'{my_set = }\n{other_set = }\n{new_set = } union')
-# print()
-#
-my_set = {3, 4, 2, 5, 6, 1, 7}
-other_set = {1, 4, 42, 314}
-new_set = my_set.intersection(other_set)
-print(f'{my_set = }\n{other_set = }\n{new_set = } intersection ')
-print()
-#
-# my_set = {3, 4, 2, 5, 6, 1, 7}
-# other_set = {1, 4, 42, 314}
-# new_set = my_set.difference(other_set)
-# print(f'{my_set = }\n{other_set = }\n{new_set = } difference ')
-##########################
-
-# tourists = {
-#     'Alex': ('Палатка', 'Спальник', 'Фонарик', 'Миска', 'Хлеб', 'Карта'),
-#     'Oleg': ('Спальник','Спички', 'Миска', 'Кружка', 'Консервы', 'Компас'),
-#     'Dima': ('Спальник','Топор', 'Миска', 'Кружка', 'Крупа', 'Телефон', 'Батарейки')
-# }
-# one = list(tourists.values())
-# print(one)
-# def list_atribute_frends(dict_list):
-#     list_atribute = []
-#     for atribut in dict_list.values():
-#         list_atribute += atribut
-#     return list_atribute
-#
-#
-# # Какие вещи уникальны, есть только у одного друга
-# # и имя того, у кого данная вещь отсутствует
-# count = 0
-# # for i in list_atribute_frends(friends):
-# #     for j in list_atribute_frends(friends):
-# #         if j == i:
-# #             count += 1
-#
-# def dict_unicum_atribute (dict_list):
-#     name_not_atribute = []
-#     new_dict = {}
-#     count = 0
-#     for key, value in tourists.items():
-#         name_not_atribute.append(key)
-#         new_dict[key] = []
-#         for j in value:
-#             for k in list_atribute_frends(tourists):
-#                 if k == j:
-#                     count += 1
-#             if count == 1:
-#                 new_dict[key] += [j]
-#             if count > 1:
-#                 name_not_atribute.remove(key)
-#             count = 0
-#     print("у этого списка людей отсутствует вещь, которая дублируется у остальных", name_not_atribute)
-#     return new_dict
-#
-# print(f"Вещи которые взяли три друга{sorted(set(list_atribute_frends(tourists)))}")
-# # print(f"Уникальные вещи которые взял каждый друг {dict_unicum_atribute(friends)}")
+all_friends_except_one(friends)
