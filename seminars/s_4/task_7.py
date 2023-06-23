@@ -20,3 +20,4 @@ def comp_result(comp_dict):
     return True
 
 print(comp_result(companies))
+
