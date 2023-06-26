@@ -9,12 +9,16 @@ text = '48 57'
 
 
 def my_func(in_text):
-    my_dict = dict()
-    start, stop = map(int, in_text.split())
+    key_list = []
+    value_list = []
+    for item in sorted(in_text.split()):
+        value_list.append(item)
+    for item in (ord(chr) for chr in sorted(in_text)):
+        key_list.append(item)
+    uni_dict = dict(zip(key_list, value_list))
 
-    for i in range(min(start, stop), max(start, stop) + 1):
-        my_dict[chr(i)] = i
-    return my_dict
+    return uni_dict
 
 
 print(my_func(text))
+

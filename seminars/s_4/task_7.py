@@ -5,15 +5,19 @@
 # прибыльные, верните истину, а если хотя бы одна убыточная — ложь.
 
 companies = {
-    'audi': [100, 90, 500, -1000, 800, 1800],
-    'opel': [-100, 900, 400, 5000, -600],
-    'nissan': [500, -700, 450, 840, 999]
+    'audi' : [100, -90, 500, -1000, 800, -1800],
+    'opel' : [-100, 900, -400, 5000, -600],
+    'nissan' : [500, -700, 450, -840, 999]
 }
 
-
 def comp_result(comp_dict):
-    return all(map(lambda lst: sum(lst) > 0, (comp_dict.values())))
+    for k, v in comp_dict.items():
+        res = sum(v)
+        print(res)
+        if res < 0:
+            return False
 
-
+    return True
 
 print(comp_result(companies))
+
