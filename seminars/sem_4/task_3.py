@@ -4,3 +4,21 @@
 # символ из Unicode, а значением — целое число.
 # ✔ Диапазон пар ключ-значение от наименьшего из введённых
 # пользователем чисел до наибольшего включительно.
+
+text = '3 2'
+
+
+def my_func(in_text):
+    key_list = []
+    value_list = []
+    for item in sorted(in_text.split()):
+        value_list.append(item)
+    for item in ' '.join(r'\u{:04X}'.format(ord(chr)) for chr in sorted(in_text.split())).split():
+        key_list.append(item)
+    uni_dict = dict(zip(key_list, value_list))
+
+    return uni_dict
+
+
+print(my_func(text))
+
