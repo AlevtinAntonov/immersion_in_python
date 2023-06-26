@@ -1,9 +1,13 @@
-# Возьмите задачу о банкомате из семинара 2. Разбейте её на отдельные операции — функции. Дополнительно сохраняйте
-# все операции поступления и снятия средств в список.
+# Возьмите задачу о банкомате из семинара 2. Разбейте её на отдельные операции — функции.
+# Дополнительно сохраняйте все операции поступления и снятия средств в список.
 import sys
+from datetime import datetime
 
 START_SUM = 0
 START_OPERATION = 0
+log_lst = []
+dt = datetime.now()
+
 
 def check_input(message):
     while True:
@@ -61,11 +65,17 @@ def start():
         match select:
             case 1:
                 balance, operations = increase(balance, operations)
+                log_lst.append(f'Пополнение счета на сумму -> {balance}, операция {operations}, {dt}')
             case 2:
                 balance, operations = decrease(balance, operations)
+                log_lst.append(f'Снятие со счета суммы -> {balance}, операция {operations}, {dt}')
             case 3:
+                log_lst.append(f'Выход, {dt}')
+                # log_res =
+                print(log_lst)
                 sys.exit()
             case _:
+                log_lst.append(*f'Повторите попытку, {dt}')
                 print('Повторите попытку')
 
 
