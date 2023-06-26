@@ -3,6 +3,7 @@
 # не хешируем, используйте его строковое представление.
 
 
+
 def func(**kwargs):
     return {v if v.__hash__ is not None else str(v): k for k, v in kwargs.items()}
 
