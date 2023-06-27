@@ -29,7 +29,7 @@ prefix, *_, suffix = link.split('/')
 # Распаковка со звёздочкой
 data = [2, 4, 6, 8, 10, ]
 for item in data:
-print(item, end='\t')
+    print(item, end='\t')
 
 data = [2, 4, 6, 8, 10, ]
 print(*data, sep='\t')
@@ -88,7 +88,7 @@ list_iter = iter(data, 6) # TypeError: iter(v, w): v must be callable
 import functools
 f = open('mydata.bin', 'rb')
 for block in iter(functools.partial(f.read, 16), b''):
-print(block)
+    print(block)
 f.close()
 
 # Функция next
@@ -160,7 +160,7 @@ print(f'{len(res)=}\n{res}')
 my_listcomp = [chr(i) for i in range(97, 123)]
 print(my_listcomp) # ['a', 'b', 'c', 'd', ..., z]
 for char in my_listcomp:
-print(char)
+    print(char)
 
 # data = [2, 5, 1, 42, 65, 76, 24, 77]
 # res = []
