@@ -3,11 +3,15 @@
 
 num = int(input('Введите целое число: '))
 
-fibo_nums = []
-a, b = 0, 1
 
-for i in range(num):
-    fibo_nums.append(a)
-    a, b = b, a + b
+def fibo_calc(num):
+    fibo_nums = []
+    a, b = 0, 1
 
-print(*fibo_nums)
+    for i in range(num):
+        fibo_nums.append(a)
+        a, b = b, a + b
+    yield fibo_nums
+
+
+print(*fibo_calc(num))
