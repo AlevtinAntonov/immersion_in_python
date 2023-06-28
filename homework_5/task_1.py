@@ -10,8 +10,7 @@ def path_to_file(abs_path):
 
 
 def path_to_file_2(abs_path):
-    index = abs_path.rfind('/')
-    dot = abs_path.rfind('.')
+    index, dot = abs_path.rfind('/'), abs_path.rfind('.')
     return abs_path[0:index], abs_path[index + 1:dot], abs_path[dot + 1:]
 
 

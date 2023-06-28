@@ -1,17 +1,15 @@
 # Создайте функцию генератор чисел Фибоначчи (см. Википедию)
 
+num = int(input('Введите номер элемента Фиббоначи: '))
 
-num = int(input('Введите целое число: '))
 
-
-def fibo_calc(num):
-    fibo_nums = []
-    a, b = 0, 1
-
-    for i in range(num):
-        fibo_nums.append(a)
+def fibo_calc(n):
+    n = int(n) - 2
+    a = b = 1
+    while n:
         a, b = b, a + b
-    yield fibo_nums
+        n -= 1
+    yield b
 
 
-print(*fibo_calc(num))
+print(f"Значение {num} элемента: ", *fibo_calc(num))
