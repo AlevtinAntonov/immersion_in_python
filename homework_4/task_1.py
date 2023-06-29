@@ -7,7 +7,11 @@ def func():
     vars_name_lst = ['datas', 's', 'names', 'sx']
     for var_name in vars_name_lst:
         if var_name.endswith('s') and var_name != 's':
-            globals()[f'{var_name[:-1:]}'] = globals()[f'{var_name}']
+glb = globals()
+def func():
+    for var_name in list(glb):
+        if var_name.endswith('s') and var_name != 's':
+            glb[f'{var_name[:-1:]}'], glb[f'{var_name}'] = glb[f'{var_name}'], None
             globals()[f'{var_name}'] = None
 
 
