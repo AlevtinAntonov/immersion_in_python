@@ -1,14 +1,14 @@
 # Возьмите задачу о банкомате из семинара 2. Разбейте её на отдельные операции — функции.
 # Дополнительно сохраняйте все операции поступления и снятия средств в список.
 import sys
-from logger import calculation_logger
+from logger_2 import LOG
 
 START_SUM = 0
 START_OPERATION = 0
-global inc, dec
 
 
 def check_input(message):
+    """ проверка на кратность 50"""
     while True:
         inp = int(input(message))
         if inp % 50 != 0:
@@ -17,7 +17,9 @@ def check_input(message):
             return inp
 
 
+# @LOG
 def increase(bal, op):
+    """ Пополнение счета """
     inc = check_input("Введите сумму для пополнения ")
     if op % 3 == 0 and op != 0:
         bal += bal * 0.03
@@ -25,10 +27,12 @@ def increase(bal, op):
     op += 1
     if bal > 5_000_000:
         bal -= bal // 10
-    return bal, op, inc
+    return bal, op
 
 
+@LOG
 def decrease(bal, op):
+    """ Снятие со счета """
     if bal > 5_000_000:
         bal -= bal // 10
     dec = check_input('Введите сумму для снятия ')
@@ -45,10 +49,11 @@ def decrease(bal, op):
     if op % 3 == 0 and op != 0:
         bal += bal * 0.03
     op += 1
-    return bal, op, dec
+    return bal, op
 
 
 def start():
+    """ Запуск программы """
     balance = START_SUM
     operations = START_OPERATION
     while True:
@@ -63,17 +68,13 @@ def start():
 Выберите действие: """))
         match select:
             case 1:
-                balance, operations, inc = increase(balance, operations)
-                calculation_logger(select, inc, balance)
+                balance, operations = increase(balance, operations)
             case 2:
-                balance, operations, dec = decrease(balance, operations)
-                calculation_logger(select, dec, balance)
+                balance, operations = decrease(balance, operations)
             case 3:
-                calculation_logger(select, 'Выход', balance)
                 sys.exit()
             case _:
                 print('Повторите попытку')
-                calculation_logger(select, 'Повторите попытку', balance)
 
 
 start()

@@ -3,16 +3,12 @@
 # на s (кроме переменной из одной буквы s) на None. Значения не удаляются, а помещаются
 # в одноимённые переменные без s на конце.
 
-def func():
-    vars_name_lst = ['datas', 's', 'names', 'sx']
-    for var_name in vars_name_lst:
-        if var_name.endswith('s') and var_name != 's':
+
 glb = globals()
 def func():
     for var_name in list(glb):
         if var_name.endswith('s') and var_name != 's':
             glb[f'{var_name[:-1:]}'], glb[f'{var_name}'] = glb[f'{var_name}'], None
-            globals()[f'{var_name}'] = None
 
 
 datas = [42, -73, 12, 85, -15, 2]
