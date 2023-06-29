@@ -1,7 +1,7 @@
 # Напишите функцию для транспонирования матрицы
 
 def matrix_transpose(lst):
-    return [list(i) for i in zip(*lst)]
+    return [*map(list, zip(*lst))]
 
 
 my_lst = [[1, 2, 3], [4, 5, 6]]
