@@ -1,12 +1,13 @@
 # Возьмите задачу о банкомате из семинара 2. Разбейте её на отдельные операции — функции.
 # Дополнительно сохраняйте все операции поступления и снятия средств в список.
 import sys
-from logger_2 import LOG
+from logger import LOG
 
 START_SUM = 0
 START_OPERATION = 0
 
 
+@LOG
 def check_input(message):
     """ проверка на кратность 50"""
     while True:
@@ -17,7 +18,7 @@ def check_input(message):
             return inp
 
 
-# @LOG
+@LOG
 def increase(bal, op):
     """ Пополнение счета """
     inc = check_input("Введите сумму для пополнения ")

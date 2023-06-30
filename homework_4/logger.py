@@ -1,8 +1,13 @@
 from datetime import datetime as dt
 
 
-def calculation_logger(operation, data, bal):
-    '''Creates log file with current time and action'''
-    time = dt.now().strftime('%d.%m.%Y %H:%M:%S')
-    with open('log.txt', 'a', encoding='UTF-8') as file:
-        file.write(f'{time}; номер операции -> {operation};  сумма -> {data}; баланс -> {bal}\n')
+def LOG(func):
+    def wrapper(*args):
+        result = func(*args)
+        print(*args)
+        with open('log.csv', 'a', encoding='utf-8') as log:
+            log.write(
+                f'Функция: {func.__name__}; {func.__doc__}; Баланс/Операция № {args}; {dt.now()}\n')
+        return result
+
+    return wrapper
