@@ -8,28 +8,23 @@
 from random import randint
 
 
-
-result = None
-player_number = None
-count = 1
-
-def game(start, end, steps):
-    number = randint(LOWER_LIMIT, UPPER_LIMIT)
-    while count <= NUMBER_OF_ATTEMPTS:
-        player_number = int(input(f'{count} попытка. Введите число от {LOWER_LIMIT} до {UPPER_LIMIT}: '))
-        if LOWER_LIMIT <= player_number <= UPPER_LIMIT:
+def game(start_, end_, steps_):
+    number = randint(start_, end_ + 1)
+    while steps_:
+        player_number = int(input(f'{steps_} попытка. Введите число: '))
+        if start_ <= player_number <= end_:
             if player_number == number:
-                result = 'Вы угадали число!!!'
-                break
+                return True
             elif player_number > number:
                 result = 'Ваше число больше загаданного'
             else:
                 result = 'Ваше число меньше загаданного'
         print(result)
-        count += 1
+        steps_ -= 1
+    else:
+        return False
 
 
 if __name__ == '__main__':
-    game()
-
-
+    start, end, steps = 1, 100, 10
+    game(start, end, steps)
