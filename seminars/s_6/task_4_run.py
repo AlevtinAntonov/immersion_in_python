@@ -1,3 +1,4 @@
-from  task_4 import zg
+from  task_4 import zg_dict, out_result
 
-zg('Text zg', {'One', 'one', 'ONE'}, 5)
+zg_dict()
+out_result()
