@@ -8,9 +8,12 @@
 # расстановки ферзей в задаче выше. Проверяйте различные случайные варианты и выведите 4 успешных расстановки.
 # *Выведите все успешные варианты расстановок
 from itertools import permutations
+from random import randint as r
 
+__all__ = ['eight_queens', 'check_eight_queens', 'all_eight_queens']
 variant_1 = [(1, 1), (2, 5), (3, 8), (4, 6), (5, 3), (6, 7), (7, 2), (8, 4)]
-
+variant_rand = [[]]
+success_count = 1
 
 def eight_queens():
     for p in permutations(range(1, 9)):
@@ -23,6 +26,14 @@ def check_eight_queens(variant):
     return False
 
 
+def random_eight_queens():
+    var_rand = []
+    for i in range(1, 9):
+        var_rand.append((r(1, 9), r(1, 9)))
+    return var_rand
+
+
+
 def all_eight_queens():
     for queen in eight_queens():
         err = False
@@ -33,5 +44,13 @@ def all_eight_queens():
         if not err:
             print(queen)
 
-all_eight_queens()
-print(check_eight_queens(variant_1))
+
+# while success_count:
+#     if check_eight_queens(random_eight_queens()):
+#         print(check_eight_queens(random_eight_queens()), True, success_count)
+#         success_count -= 1
+
+# all_eight_queens()
+# print(check_eight_queens(variant_1))
+random_eight_queens()
+print(random_eight_queens())
