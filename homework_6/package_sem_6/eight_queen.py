@@ -11,9 +11,11 @@ from itertools import permutations
 from random import randint as r
 
 __all__ = ['eight_queens', 'check_eight_queens', 'all_eight_queens']
-variant_1 = [(1, 1), (2, 5), (3, 8), (4, 6), (5, 3), (6, 7), (7, 2), (8, 4)]
+variant_1 = [(1, 8), (2, 4), (3, 1), (4, 3), (5, 6), (6, 2), (7, 7), (8, 5)]
+variant_2 = [(1, 8), (2, 4), (3, 1), (4, 3), (5, 6), (6, 2), (7, 7), (8, 4)]
 variant_rand = [[]]
-success_count = 1
+success_count = 4
+
 
 def eight_queens():
     for p in permutations(range(1, 9)):
@@ -29,9 +31,17 @@ def check_eight_queens(variant):
 def random_eight_queens():
     var_rand = []
     for i in range(1, 9):
-        var_rand.append((r(1, 9), r(1, 9)))
+        var_rand.append((r(1, 8), r(1, 8)))
     return var_rand
 
+
+def check_random_queens(try_num, count=0):
+    while try_num:
+        ans = random_eight_queens()
+        if check_eight_queens(ans):
+            print(f'Совпадение {ans}, попытка № {count}')
+            try_num -= 1
+        count += 1
 
 
 def all_eight_queens():
@@ -45,12 +55,9 @@ def all_eight_queens():
             print(queen)
 
 
-# while success_count:
-#     if check_eight_queens(random_eight_queens()):
-#         print(check_eight_queens(random_eight_queens()), True, success_count)
-#         success_count -= 1
-
-# all_eight_queens()
-# print(check_eight_queens(variant_1))
-random_eight_queens()
-print(random_eight_queens())
+print(f'Результат проверки - {check_eight_queens(variant_1)}')
+print(f'Результат проверки - {check_eight_queens(variant_2)}')
+print(f'Случайная расстановка {random_eight_queens()}')
+print(f'Случайная расстановка проверка  {check_eight_queens(random_eight_queens())}')
+all_eight_queens()
+# print(check_random_queens(success_count))
