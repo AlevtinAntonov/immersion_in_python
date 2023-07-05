@@ -1,15 +1,4 @@
-# Напишите функцию, которая заполняет файл
-# (добавляет в конец) случайными парами чисел.
-# Первое число int, второе - float разделены вертикальной чертой.
-# Минимальное число - -1000, максимальное - +1000.
-# Количество строк и имя файла передаются как аргументы функции
+from s_7_package import task_1_module
 
-from  random import randint, uniform
+task_1_module.fill_file(5, 'out/task_1.txt')
 
-def fill_file(lines, filename):
-    with open(filename, 'w', encoding='utf-8') as f:
-        for _ in range(lines):
-            f.write(f'{randint(-1000, 1000)}|{uniform(-1000, 1000)} \n')
-
-if __name__ == "__main__":
-    fill_file(5, 'task_1.txt')
