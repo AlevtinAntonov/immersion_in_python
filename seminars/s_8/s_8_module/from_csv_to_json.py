@@ -6,22 +6,30 @@
 # Получившиеся записи сохраните в json файл, где каждая строка csv файла представлена как отдельный json словарь.
 # Имя исходного и конечного файлов передавайте как аргументы функции.
 import csv
-def from_csv_to_json():
+import json
+def from_csv_to_json(file_csv, file_json):
+    """
+    read csv file and write to json file
+    :param file_csv: in file.csv
+    :param file_json: out file.json
+    :return:
+    """
 
-    with open('../out/task_2.csv', 'r', encoding='utf-8') as f:
+    with open(file_csv, 'r', encoding='utf-8') as f:
         file = csv.reader(f)
         lst = []
         for i, (level, id_, name) in enumerate(file):
-            dict_json = {}
             if i != 0:
                 lst.append({
                     'level': int(level),
                     'id_': id_.zfill(10),
                     'name': str(name).title(),
-                    'hash': hash(name + id_)
+                    'hash': hash(name + id_),
                 }
                 )
-    print(lst)
+    with open(file_json, 'w', encoding='utf-8') as f2:
+        json.dump(lst, f2, indent=2)
 
-from_csv_to_json()
+
+
 

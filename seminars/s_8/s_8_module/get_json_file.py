@@ -8,14 +8,17 @@ import json
 
 
 def get_json_file():
+    """
+    from file.txt convert to file.json
+    :return: json file
+    """
     with(
-        open('../out/result.txt', 'r', encoding='utf-8') as f1,
-        open('../out/result.json', 'w', encoding='utf-8') as f2,
-        ):
+        open('out/result.txt', 'r', encoding='utf-8') as f1,
+        open('out/result.json', 'w', encoding='utf-8') as f2,
+    ):
         my_dict = {}
-
         for line in f1:
-            name, value = line.strip().split('|')
-            my_dict[name.upper] = value
+            print(line.strip())
+            name, value = line.strip().split(' - ')
+            my_dict[name.capitalize()] = value
         json.dump(my_dict, f2, indent=2)
-

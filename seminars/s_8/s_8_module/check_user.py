@@ -9,7 +9,11 @@ from pathlib import Path
 
 
 def check_user():
-    if Path('../out/task_2.json').exists():
+    """
+    ask data from user and add to json file
+    :return:
+    """
+    if Path('out/task_2.json').exists():
         with open('out/task_2.json', 'r', encoding='utf-8') as f:
             file = json.load(f)
     else:
@@ -20,7 +24,7 @@ def check_user():
             break
         name, id_, access = inp.split()
         file[access].update({id_: name})
-    with open('../out/task_2.json', 'w', encoding='utf-8') as f:
+    with open('out/task_2.json', 'w', encoding='utf-8') as f:
         json.dump(file, f)
 
 check_user()
