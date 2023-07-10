@@ -6,20 +6,20 @@ import json
 import pickle
 
 
-def convert_pickle_to_csv(file):
+def convert_pickle_to_csv(file, output_file):
     """
     convert pickle file to csv
     :return:
     """
     with (
         open(file, 'rb') as f,
-    open('task_1.csv', 'w', newline='', encoding='utf-8') as c
+        open(output_file, 'w', newline='', encoding='utf-8') as f2
     ):
-        read_file = pickle.load(f)
-        print(read_file)
-        readheader = csv.DictWriter(c, fieldnames=['Level', 'ID', 'Name', 'Hash'])
-        readheader.writeheader()
-        readheader.writerows(read_file)
+        dict_file = pickle.load(f)
+        csv_writer = csv.DictWriter(f2, fieldnames=dict_file[0].keys())
+        csv_writer.writeheader()
+        csv_writer.writerows(dict_file)
+
 
 if __name__ == '__main__':
-    convert_pickle_to_csv('task_4.pickle')
+    convert_pickle_to_csv('task_4.pickle', 'task_1.csv')
