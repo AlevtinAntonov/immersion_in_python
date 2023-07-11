@@ -8,76 +8,72 @@ import pickle
 import json
 import csv
 
-KEY_PARENT = 'parent'
-KEY_SIZE = 'size'
-KEY_TYPE = 'type'
-KEY_NAME = 'name'
-KEY_CHILD = 'child'
-
-THIS_FILE = 'file'
-THIS_DIR = 'dir'
-
-
-def save_to_json(info: dict, file_name: str):
-    with open(file_name, "w") as f:
-        json.dump(info, f, indent=2)
+OBJ_CHILD = 'child'
+OBJ_PARENT = 'parent'
+OBJ_NAME = 'name'
+OBJ_TYPE = 'type'
+OBJ_TYPE_DIR = 'dir'
+OBJ_TYPE_FILE = 'file'
+OBJ_SIZE = 'size'
 
 
-def save_to_csv(info: dict, file_name: str):
-    with open(file_name, "w", encoding="UTF-8", newline='') as f:
-        csw_writer = csv.DictWriter(f, dialect='excel', quoting=csv.QUOTE_MINIMAL,
-                                    fieldnames=[KEY_PARENT, KEY_NAME, KEY_SIZE, KEY_TYPE])
-        csw_writer.writeheader()
-        dict_info = []
-        _dict_info(info, dict_info)
-
-        csw_writer.writerows(dict_info)
+def directory_info(path: str = None):
+    return directory_traversal(Path().cwd() if path is None else Path(path))
 
 
-def save_to_picle(info: dict, file_name: str):
-    with open(file_name, "wb") as f:
-        pickle.dump(info, f)
-
-
-def dir_info(path: str = None) -> dict:
-    """Получение информации о каталоге path. Если не указан - обрабатывается текущий каталог."""
-    start_path = Path().cwd() if path is None else Path(path)
-    return _file_info(start_path)
-
-
-def _dict_info(info: dict, list_info: list) -> list:
-    csv_dict = {
-        KEY_PARENT: info.get(KEY_PARENT, ""),
-        KEY_NAME: info.get(KEY_NAME, ""),
-        KEY_TYPE: info.get(KEY_TYPE, ""),
-        KEY_SIZE: info.get(KEY_SIZE, 0)
-    }
-    list_info.append(csv_dict)
-    list_child = info.get(KEY_CHILD, None)
-    if list_child is not None:
-        for c in list_child:
-            _dict_info(c, list_info)
-    return list_info
-
-
-def _file_info(file: Path) -> dict:
-    """Формирование словаря информации о файле"""
-    info = {KEY_PARENT: file.parent.name, KEY_NAME: file.name}
+def directory_traversal(file: Path):
+    obj_dict = {OBJ_PARENT: file.parent.name, OBJ_NAME: file.name}
     if file.is_file():
-        info[KEY_SIZE] = file.stat().st_size
-        info[KEY_TYPE] = THIS_FILE
+        obj_dict[OBJ_SIZE] = file.stat().st_size
+        obj_dict[OBJ_TYPE] = OBJ_TYPE_FILE
     else:
-        info[KEY_TYPE] = THIS_DIR
-        info[KEY_SIZE] = 0
-        list_child = []
-        for p in file.iterdir():
-            child = _file_info(p)
-            info[KEY_SIZE] += child.get(KEY_SIZE, 0)
-            list_child.append(child)
-        info[KEY_CHILD] = list_child
+        obj_dict[OBJ_TYPE] = OBJ_TYPE_DIR
+        obj_dict[OBJ_SIZE] = 0
+        lst_child = []
+        for item in file.iterdir():
+            child = directory_traversal(item)
+            obj_dict[OBJ_SIZE] += child.get(OBJ_SIZE, 0)
+            lst_child.append(child)
+        obj_dict[OBJ_CHILD] = lst_child
 
-    return info
+    return obj_dict
 
 
-if __name__ == '__main__':
-    print(dir_info('../seminars'))
+def directory_traversal_to_list(res_dict: dict, lst_info: list):
+    csv_dict = {
+        OBJ_PARENT: res_dict.get(OBJ_PARENT, ''),
+        OBJ_NAME: res_dict.get(OBJ_NAME, ''),
+        OBJ_TYPE: res_dict.get(OBJ_TYPE, ''),
+        OBJ_SIZE: res_dict.get(OBJ_SIZE, 0)
+    }
+    lst_info.append(csv_dict)
+    lst_child = res_dict.get(OBJ_CHILD, None)
+    if lst_child is not None:
+        for c in lst_child:
+            directory_traversal_to_list(c, lst_info)
+    return lst_info
+
+
+def save_to_json(res_dict: dict, file_name: str):
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(res_dict, f, indent=2)
+
+
+def save_to_csv(res_dict: dict, file_name: str):
+    with open(file_name, 'w', encoding='utf-8', newline='') as f:
+        csv_writer = csv.DictWriter(f, fieldnames=[OBJ_PARENT, OBJ_NAME, OBJ_SIZE, OBJ_TYPE])
+        csv_writer.writeheader()
+        lst = []
+        directory_traversal_to_list(res_dict, lst)
+        csv_writer.writerows(lst)
+
+
+def save_to_pickle(res_dict: dict, file_name: str):
+    with open(file_name, 'wb') as f:
+        pickle.dump(res_dict, f)
+
+
+if __name__ == "__main__":
+    save_to_json(directory_info('../seminars/s_8'), 'result.json')
+    save_to_csv(directory_info('../seminars/s_8'), 'result.csv')
+    save_to_pickle(directory_info('../seminars/s_8'), 'result.pickle')
