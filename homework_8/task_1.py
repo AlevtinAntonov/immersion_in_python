@@ -15,7 +15,7 @@ def convert_pickle_to_csv(file, output_file):
         open(output_file, 'w', newline='', encoding='utf-8') as f2
     ):
         dict_file = pickle.load(f)
-        csv_writer = csv.DictWriter(f2, fieldnames=dict_file[0].keys())
+        csv_writer = csv.DictWriter(f2, fieldnames=dict_file[0])
         csv_writer.writeheader()
         csv_writer.writerows(dict_file)
 
