@@ -23,3 +23,7 @@ def test_func():
 
 if __name__ == '__main__':
     test_func()
+
+result = {'args': args,
+                  'kwargs': kwargs,
+                  'result': func_res}

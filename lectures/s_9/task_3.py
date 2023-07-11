@@ -37,3 +37,7 @@ def test_func(a: int, b: str, c: int):
 if __name__ == '__main__':
     test_func(1, '2', 3)
     test_func(3, '4', 5)
+
+# result = {'args': args,
+#         'kwargs': kwargs,
+#         'result': func_res}

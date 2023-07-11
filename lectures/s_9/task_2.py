@@ -10,9 +10,10 @@ from random import randint
 
 def deco_guess_number(func):
     def wrapper(num: int, count: int):
-        if 1 > num or num > 100:
+        if not 1 <= num <= 100:
+            print(num)
             num = randint(1, 100)
-        if 1 > count or count > 10:
+        if not 1 <= count <= 10:
             count = randint(1, 10)
         result = func(num, count)
         return result
@@ -25,8 +26,7 @@ def game(num: int, count: int):
         print(f"Попытка номер {i} ")
         user_num = int(input("Введите число от 1 до 100: "))
         if user_num == num:
-            print("Вы угадали!")
-            break
+            return "Вы угадали!"
         elif user_num < num:
             print("Ваше число меньше")
         else:
@@ -34,4 +34,4 @@ def game(num: int, count: int):
 
 
 if __name__ == '__main__':
-    game(51, -5)
+    game(101, 5)
