@@ -6,6 +6,7 @@
 # Имя файла должно совпадать с именем декорируемой функции.
 
 import json
+from functools import wraps
 from typing import Callable
 from pathlib import Path
 
@@ -18,11 +19,14 @@ def to_json_wrapper(func) -> Callable[[], None]:
     else:
         json_file = []
 
+    @wraps(func)
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        dct = {'args': args, **kwargs, 'result': result}
+        dct = {'args': args,
+               'kwargs': kwargs,
+               'result': result}
         json_file.append(dct)
-        with open(file, 'a', encoding='utf-8') as json_f:
+        with open(file, 'w', encoding='utf-8') as json_f:
             json.dump(json_file, json_f, indent=2)
         return result
 
@@ -37,7 +41,3 @@ def test_func(a: int, b: str, c: int):
 if __name__ == '__main__':
     test_func(1, '2', 3)
     test_func(3, '4', 5)
-
-# result = {'args': args,
-#         'kwargs': kwargs,
-#         'result': func_res}

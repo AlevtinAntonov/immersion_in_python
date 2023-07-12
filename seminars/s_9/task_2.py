@@ -6,12 +6,13 @@
 
 from typing import Callable
 from random import randint
+from functools import wraps
 
 
 def deco_guess_number(func):
+    @wraps(func)
     def wrapper(num: int, count: int):
         if not 1 <= num <= 100:
-            print(num)
             num = randint(1, 100)
         if not 1 <= count <= 10:
             count = randint(1, 10)
@@ -34,4 +35,4 @@ def game(num: int, count: int):
 
 
 if __name__ == '__main__':
-    game(101, 5)
+    print(game(50, 5))

@@ -5,35 +5,20 @@
 # ○ декоратором контроля значений и
 # ○ декоратором для многократного запуска.
 # Выберите верный порядок декораторов.
-
-from typing import Callable
-from random import randint
-from counter_wrap import counter_wrap
-from to_json_wrap import to_json_wrapper
+from seminars.s_9.task_2 import deco_guess_number
+from seminars.s_9.task_3 import to_json_wrapper
+from seminars.s_9.task_4 import counter_wrap
 
 
-def binary_search_game_wrap(func) -> Callable[[], None]:
-    def wrapper(num: int, count: int, *args, **kwargs):
-        if 1 > num or num > 100:
-            num = randint(1, 100)
-        if 1 > count or num > 10:
-            count = randint(1, 10)
-        result = func(num, count, *args, **kwargs)
-        return result
-
-    return wrapper
-
-
-@counter_wrap(3)
-@binary_search_game_wrap
+@counter_wrap(2)
 @to_json_wrapper
+@deco_guess_number
 def game(num: int, count: int):
     for i in range(1, count + 1):
         print(f"Попытка номер {i} ")
-        user_num = int(input("Введите число от 1 до 100: \n >>> "))
+        user_num = int(input("Введите число от 1 до 100: "))
         if user_num == num:
-            print("Угадал!!!")
-            break
+            return "Вы угадали!"
         elif user_num < num:
             print("Ваше число меньше")
         else:
@@ -41,4 +26,4 @@ def game(num: int, count: int):
 
 
 if __name__ == '__main__':
-    game(101, -15)
+    print(game(50, 5))
