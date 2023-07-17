@@ -20,7 +20,7 @@ def data_from_csv_wrap(file_name: str):
             with open(file_name, 'r', encoding='utf-8') as csv_file:
                 reader = csv.reader(csv_file, quoting=csv.QUOTE_NONNUMERIC)
                 for row in reader:
-                    x_1, x_2 = func(row[0], row[1], row[2])
+                    x_1, x_2 = func(*map(int, row))
                     lst_solution.append([row[0], row[1], row[2], x_1, x_2])
             return lst_solution
 
