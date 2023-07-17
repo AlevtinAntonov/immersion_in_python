@@ -17,11 +17,12 @@ class Circle:
 
     @classmethod
     def square(cls, area):
-        return cls((area / pi) ** 0.5
+        return cls((area/ pi) ** .5)
 
 
-
-print(a.circumference(10))
-print(a.area())
-print(a.square())
-
+if __name__ == '__main__':
+    a = Circle.square(100)
+    print(a.circumference())
+    print(a.area())
+    b = Circle.circumference(Circle.square(100))
+    print(b)

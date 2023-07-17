@@ -14,8 +14,8 @@ class Rectangle:
     def square(self):
         return self.width * self.length
 
+if __name__ == '__main__':
+    a = Rectangle(5)
+    b = Rectangle(5, 2)
 
-a = Rectangle(5)
-b = Rectangle(5, 2)
-
-print(a.perimeter(), b.perimeter(), a.square(), b.square())
+    print(a.perimeter(), b.perimeter(), a.square(), b.square())
