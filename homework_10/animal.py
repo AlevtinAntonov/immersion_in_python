@@ -62,6 +62,10 @@ class Mammal(Animal):
         return f'Для {self.name} , вес {self.weight}, {self._mammal_type()}'
 
 
+class Dog(Animal):
+    pass
+
+
 if __name__ == '__main__':
     mammal = Mammal('Bob', 4)
     fish = Fish('Neo', 10)
