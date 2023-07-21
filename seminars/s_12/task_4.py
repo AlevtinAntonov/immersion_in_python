@@ -49,6 +49,7 @@ class Rectangle:
         else:
             raise ValueError('Длина должна быть положительна')
 
-a = Rectangle(4,5)
-print(a.square())
-print(a.per())
+if __name__ == "__main__":
+    a = Rectangle(4,5)
+    print(a.square())
+    print(a.per())
