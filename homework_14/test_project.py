@@ -1,27 +1,41 @@
 import pytest
+import json
 from user import User
 from project import Project
+
+
+# @pytest.fixture
+# def get_file(tmp_path):
+#     f_name = tmp_path / 'test_file.json'
+#     with open(f_name, 'w+', encoding='utf-8') as f:
+#         print(f'{f=}')
+#         yield f
 
 
 @pytest.fixture
 def get_file(tmp_path):
     f_name = tmp_path / 'test_file.txt'
+    print(f'Создаю файл {f_name}')  # принтим в учебных целях
     with open(f_name, 'w+', encoding='utf-8') as f:
         yield f
+    print(f'Закрываю файл {f_name}')  # принтим в учебных целях
 
-
-@pytest.fixture
 def set_data(get_file):
-    user = "User(name='Иван', user_id=123, level=1)"
-    get_file.write(user)
+    print(f'Заполняю файл {get_file.name} цифрами') # принтим в
+    for i in range(10):
+        get_file.write('User(name="Иван", user_id=123, level=1)')
+    get_file.seek(0)
 
+# @pytest.fixture
+# def set_data(get_file):
+#     temp = [Project(User(name='Иван', user_id=123, level=1))]
+#     return temp
 
 
 def test_add_user(get_file, set_data):
     pr_user = Project(set_data)
     pr_user.enter('Иван', 123, 1)
-    pr_user.add_user('Алевтин', 1001, 1)
-    assert pr_user == ("User(name='Иван', user_id=123, level=1)", "User(name='Алевтин', user_id=1001, level=1")
+    assert pr_user.admin == pr_user
 
 
 # def test_first_char(set_char):
