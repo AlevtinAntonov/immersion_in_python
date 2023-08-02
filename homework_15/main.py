@@ -11,10 +11,10 @@ import logging
 from collections import namedtuple
 from pathlib import Path
 
-NamedObject = namedtuple('NamedObject', 'name ext is_dir parent', defaults=['', '', False, ''])
+NamedObject = namedtuple('NamedObject', 'name ext is_dir parent', defaults=['', '', True, ''])
 FORMAT = "{asctime} - {levelname:<8}: {msg}"
 
-logging.basicConfig(filename='./homework_15/log/log.log',
+logging.basicConfig(filename='./homework_15/log/log.txt',
                     filemode='w',
                     encoding='utf-8',
                     format=FORMAT,
@@ -37,37 +37,33 @@ def dir_info(path: str = None):
 
 
 def directory_traversal(file: Path):
-    fs_objects = []
+    named_objects = []
     try:
         if file.is_file():
             obj_name = Path(file.name).stem
             obj_ext = Path(file.name).suffix
             obj_dir = False
-            fs_objects.append(NamedObject(obj_name, obj_ext, obj_dir, file.parent.name))
-            logger.info(f'{obj_name=}| {obj_ext=}| {obj_dir=}| {file.parent.name}')
-
+            named_objects.append(NamedObject(obj_name, obj_ext, obj_dir, file.parent.name))
         else:
-            obj_dir = True
-            lst_child = []
             for item in file.iterdir():
                 child = directory_traversal(item)
-                # logger.info(f'{child}')
-                lst_child.append(child)
+                named_objects.append(NamedObject(child))
+                logger.info(f'{child}')
 
     except Exception as exc:
-        print(f'\033[31mERRORR: {exc.__class__.__name__}: {exc}\033[0m')
+        print(f'\033[31mERROR: {exc.__class__.__name__}: {exc}\033[0m')
         logger.info(msg=f'{exc.__class__.__name__}: {exc}')
 
-    return fs_objects
+    return named_objects
 
 
 def main():
-    for place in parse_ars():
-        for item in (dir_info(place)):
+    for pars_item in parse_ars():
+        for item in (dir_info(pars_item)):
             print(repr(item))
 
 
 if __name__ == '__main__':
     main()
 
-# python .\homework_15\main.py -p ./seminars/s_15
+# python3 homework_15/main.py -p ./seminars/s_15
