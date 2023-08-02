@@ -1,0 +1,8 @@
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='task_1', ext='.py', is_dir=False, parent='s_15')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='task_3', ext='.py', is_dir=False, parent='s_15')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='task_6', ext='.py', is_dir=False, parent='s_15')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='task_2', ext='.py', is_dir=False, parent='s_15')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='task_4', ext='.py', is_dir=False, parent='s_15')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='task_5', ext='.py', is_dir=False, parent='s_15')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name='log4', ext='.txt', is_dir=False, parent='log_dir')]
+2023-08-02 22:13:04,654 - INFO    : [NamedObject(name=[NamedObject(name='log4', ext='.txt', is_dir=False, parent='log_dir')], ext='', is_dir=True, parent='')]
